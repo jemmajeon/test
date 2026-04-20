@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,7 +8,7 @@
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-BSZWXLY5DE');
+gtag('config', 'G-BSZWXLY5DE', { send_page_view: false });
 
 // Parse URL parameters
 const params = new URLSearchParams(window.location.search);
@@ -30,7 +29,8 @@ if (target) {
     window.location.href = target;
   }, 300);
 } else {
-  // No redirect target - show landing page
+  // No redirect target - show landing page (fire page_view only here)
+  gtag('event', 'page_view', { page_title: '카페24 PRO 웨비나 랜딩' });
   document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('landing').style.display = 'block';
   });
@@ -60,7 +60,7 @@ body { font-family: -apple-system, 'Noto Sans KR', sans-serif; background: #7c3a
 <div id="landing">
   <h1>카페24 PRO 웨비나</h1>
   <p>매주 화요일 오후 2시, 온라인으로 만나보세요.<br>쇼핑몰 성장을 위한 모든 가이드를 제공합니다.</p>
-  <a href="https://docs.channel.io/pro_doc/ko/articles/PRO-%EC%9B%A8%EB%B9%84%EB%82%98--%EB%AC%B4%EB%A3%8C-%EC%83%81%EB%8B%B4-%EC%B0%B8%EC%97%AC-%EC%95%88%EB%82%B4-bd3c7e4b">웨비나 안내 보기</a>
+  <a href="https://docs.channel.io/pro_doc/ko/categories/%EC%9B%A8%EB%B9%84%EB%82%98-87c4a002">웨비나 안내 보기</a>
 </div>
 
 </body>
