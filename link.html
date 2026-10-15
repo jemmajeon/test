@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>링크 이동 · 카페24 PRO</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSZWXLY5DE"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-BSZWXLY5DE',{send_page_view:false});
+</script>
+<style>
+body{margin:0;font-family:-apple-system,'Malgun Gothic','Noto Sans KR',sans-serif;background:#f5f7fb;color:#151a24;display:flex;min-height:100vh;align-items:center;justify-content:center}
+.box{max-width:420px;margin:24px;background:#fff;border-radius:14px;padding:34px 30px;box-shadow:0 2px 12px rgba(0,0,0,.05);text-align:center}
+.k{font-size:12px;font-weight:800;color:#1b64f2;letter-spacing:1px}
+h1{font-size:18px;margin:12px 0 8px}p{color:#4b5563;font-size:14px;line-height:1.7;margin:0}
+</style></head><body>
+<div class="box"><div class="k">CAFE24 PRO · 고객성장코칭팀</div><h1 id="h">이동 중입니다…</h1><p id="p">잠시만 기다려 주세요.</p></div>
+<script>
+
+(function(){
+  var q=new URLSearchParams(location.search), raw=q.get('to')||'', target=null;
+  var OK=['event-us.kr','calendar.app.google','meet.google.com','youtu.be','youtube.com','www.youtube.com','m.booking.naver.com','www.cafe24.com','eclogin.cafe24.com','cafe24pro.channel.io','docs.channel.io','forms.gle','docs.google.com'];
+  try{ var u=new URL(raw); if(u.protocol==='https:' && OK.indexOf(u.hostname)>=0) target=u.href; }catch(e){}
+  var h=document.getElementById('h'), p=document.getElementById('p');
+  if(!target){ h.textContent='열 수 없는 링크입니다'; p.textContent='이 메일에 그대로 회신해 주시면 안내해 드리겠습니다.'; return; }
+  var host=''; try{ host=new URL(target).hostname; }catch(e){}
+  var done=false; function go(){ if(done) return; done=true; location.href=target; }
+  gtag('event','outbound_click',{
+    link_url:target, page_title:'링크 이동 → '+host,
+    utm_source:q.get('utm_source')||'', utm_medium:q.get('utm_medium')||'', utm_campaign:q.get('utm_campaign')||'', utm_content:q.get('utm_content')||'', utm_term:q.get('utm_term')||'',
+    event_callback:go, event_timeout:1500
+  });
+  setTimeout(go,1800);
+})();
+</script></body></html>

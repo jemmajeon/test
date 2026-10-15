@@ -55,7 +55,7 @@ button[disabled]{background:#9ca3af;cursor:default}
       $('box').textContent='📌 접수시각: '+kst()+' KST'; $('box').style.display='block'; b.style.display='none'; $('u').style.display='block'; }
     function retry(){ if(done) return; done=true; b.disabled=false; b.textContent='다시 시도';
       var e=$('err'); e.textContent='접수를 확인하지 못했습니다. 잠시 후 다시 눌러 주시거나 아래 채널톡으로 문의해 주세요.'; e.style.display='block'; $('u').style.display='block'; }
-    try{ gtag('event','unsubscribe_click',{utm_source:q.get('utm_source')||'email',utm_medium:q.get('utm_medium')||'coach_stage',utm_campaign:camp,utm_content:tok,event_callback:ok,event_timeout:2000}); }catch(e){ retry(); return; }
+    try{ gtag('event','unsubscribe_click',{utm_source:q.get('utm_source')||'cafe24pro',utm_medium:q.get('utm_medium')||'email',utm_campaign:camp,utm_content:tok,utm_term:q.get('utm_term')||'',event_callback:ok,event_timeout:2000}); }catch(e){ retry(); return; }
     setTimeout(retry,3500);
   };
 })();
