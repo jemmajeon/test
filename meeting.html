@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>미팅 일정 선택 · 카페24 PRO</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSZWXLY5DE"></script>
+<script>
+// 외부(사내망 밖)에서 열리는 미팅 신청 우회 페이지 — n8n 을 거치지 않는다 (n8n 은 사내 전용이라 고객이 못 연다).
+// 링크의 utm_* 는 page_view 에서 GA4 가 자동으로 «캠페인» 으로 잡는다 (웨비나·수신거부와 같은 속성 G-BSZWXLY5DE).
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-BSZWXLY5DE');
+</script>
+<style>
+body{margin:0;font-family:-apple-system,'Malgun Gothic','Noto Sans KR',sans-serif;background:#f5f7fb;color:#151a24}
+.box{max-width:520px;margin:70px auto;background:#fff;border-radius:14px;padding:40px 34px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.k{font-size:12px;font-weight:800;color:#1b64f2;letter-spacing:1px}
+h1{font-size:21px;margin:12px 0 14px}p{color:#4b5563;font-size:14px;line-height:1.8;margin:0 0 22px}
+a.btn,button{display:inline-block;background:#1b64f2;color:#fff;border:0;border-radius:8px;font-size:15px;font-weight:800;padding:13px 26px;cursor:pointer;text-decoration:none}
+button[disabled]{background:#9ca3af;cursor:default}
+@media (max-width:560px){.box{margin:24px 14px;padding:28px 22px}}
+</style></head><body>
+<div class="box"><div class="k">CAFE24 PRO · 고객성장코칭팀</div>
+<h1 id="h">미팅 일정을 선택해 주세요</h1>
+<p id="p">아래 버튼을 누르시면 담당자의 예약 달력이 열립니다. 편하신 시간을 골라 주시면 일정이 바로 확정됩니다.</p>
+<button id="b" type="button">일정 선택하기</button></div>
+<script>
+// 링크: meeting.html?utm_source=email&utm_medium=coach_stage&utm_campaign=pro_coach_meeting&utm_content=<불투명 토큰>&o=<담당 키>
+// 몰 ID·이메일·담당자 이름은 URL 에 없다 — 토큰은 내부 DB 에서만 풀린다. 예약은 구글 캘린더가 기록하고 사내가 가져간다.
+// 이동 대상은 아래 화이트리스트 키로만 정한다(임의 주소로 보내지 않는다 — 오픈 리다이렉트 방지).
+// 영업파트 칸(sales)은 영업파트 구글 캘린더 예약 링크를 알게 되면 채운다. 비어 있으면 버튼을 막고 회신 안내를 띄운다.
+var CAL={
+  jh:'https://calendar.app.google/tvVbT2iZqvuDbi788',   // jhjun01@cafe24corp.com 본인 캘린더 (전지혜)
+  sales:''                                             // globiz_easymall 영업파트 캘린더 — 링크 미확정
+};
+(function(){
+  var q=new URLSearchParams(location.search), t=(q.get('utm_content')||'').trim(), o=(q.get('o')||'jh').trim();
+  var h=document.getElementById('h'), p=document.getElementById('p'), b=document.getElementById('b');
+  var dest=Object.prototype.hasOwnProperty.call(CAL,o)?CAL[o]:'';
+  if(!/^[A-Za-z0-9]{8,32}$/.test(t)||!/^https:\/\/(calendar\.app\.google|calendar\.google\.com)\//.test(dest)){
+    h.textContent='링크를 확인할 수 없습니다'; p.textContent='이 메일에 그대로 회신해 주시면 미팅 일정을 잡아 드리겠습니다.'; b.style.display='none'; return;
+  }
+  b.onclick=function(){
+    b.disabled=true; b.textContent='달력을 여는 중…';
+    var go=function(){ location.href=dest; }, once=false;
+    function next(){ if(once) return; once=true; go(); }
+    try{ gtag('event','meeting_click',{utm_source:q.get('utm_source')||'email',utm_medium:q.get('utm_medium')||'coach_stage',utm_campaign:q.get('utm_campaign')||'pro_coach_meeting',utm_content:t,owner_key:o,event_callback:next}); }catch(e){ next(); }
+    setTimeout(next,800);   // GA4 가 막혀도(광고 차단 등) 고객은 반드시 달력으로 간다
+  };
+})();
+</script></body></html>
