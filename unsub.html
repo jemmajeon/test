@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>수신거부 · 카페24 PRO</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSZWXLY5DE"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-BSZWXLY5DE');
+</script>
+<style>
+body{margin:0;padding:0;background:#eef1f6;font-family:'Malgun Gothic','Apple SD Gothic Neo',Helvetica,Arial,sans-serif;color:#151a24}
+.wrap{padding:48px 12px}
+.card{max-width:600px;width:100%;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(20,40,80,.08)}
+.head{background:linear-gradient(135deg,#1b64f2 0%,#0a3fb0 100%);padding:34px 38px}
+.head .k{color:#cfe0ff;font-size:12px;font-weight:800;letter-spacing:1px}
+.head .t{color:#fff;font-size:21px;font-weight:800;margin-top:8px}
+.body{padding:30px 38px}
+.m{color:#2b2f38;font-size:15px;line-height:1.8}
+.box{margin-top:20px;background:#f5f8ff;border:1px solid #dbe6ff;border-radius:10px;padding:14px 18px;color:#1b3b7a;font-size:13.5px;line-height:1.7;display:none}
+button{margin-top:22px;background:#1b64f2;color:#fff;border:0;border-radius:10px;padding:14px 30px;font-size:15.5px;font-weight:800;cursor:pointer;font-family:inherit}
+button[disabled]{background:#9ca3af;cursor:default}
+.err{display:none;margin-top:14px;color:#c62828;font-size:13px;line-height:1.6}
+.u{margin-top:22px;color:#7a828f;font-size:13px;line-height:1.7;display:none}
+.u a{color:#1b64f2;text-decoration:none;font-weight:700}
+.foot{background:#fafbfd;padding:18px 38px;color:#9aa2af;font-size:12px;border-top:1px solid #eaedf3;line-height:1.7}
+@media (max-width:560px){.wrap{padding:16px 10px}.head{padding:26px 22px}.body{padding:24px 22px}.foot{padding:16px 22px}}
+</style></head><body>
+<div class="wrap"><div class="card">
+<div class="head"><div class="k">CAFE24 PRO · 고객성장코칭팀</div><div class="t" id="t">수신거부 하시겠습니까?</div></div>
+<div class="body">
+<div class="m" id="m">아래 버튼을 누르시면 이 쇼핑몰로는 카페24 PRO 고객성장코칭팀의 안내 메일을 더 보내지 않습니다.</div>
+<div class="box" id="box"></div>
+<button type="button" id="b">수신거부 확인</button>
+<div class="err" id="err"></div>
+<div class="u" id="u">문의가 있으시면 <a href="https://cafe24pro.channel.io/home">채널톡 채팅 상담</a>으로 연락해 주세요.</div>
+</div>
+<div class="foot">CAFE24 PRO · 고객성장코칭팀</div>
+</div></div>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i);}, q=new URLSearchParams(location.search), b=$('b');
+  var tok=String(q.get('utm_content')||'').trim();
+  var camp=String(q.get('utm_campaign')||'pro_coach_unsub').trim().slice(0,60);
+  function kst(){ return new Date(Date.now()+9*3600*1000).toISOString().replace('T',' ').slice(0,19); }
+  if(!/^[A-Za-z0-9]{8,32}$/.test(tok)){
+    $('t').textContent='링크를 확인할 수 없습니다'; $('m').textContent='메일에 있는 수신거부 버튼으로 다시 열어 주세요. 계속 안 되면 아래 채널톡으로 문의해 주세요.';
+    b.style.display='none'; $('u').style.display='block'; return;
+  }
+  b.onclick=function(){
+    b.disabled=true; b.textContent='접수 중…'; $('err').style.display='none';
+    var done=false;
+    function ok(){ if(done) return; done=true;
+      $('t').textContent='수신거부가 접수되었습니다'; $('m').textContent='앞으로 이 쇼핑몰로는 안내 메일을 보내지 않습니다. 불편을 드려 죄송합니다.';
+      $('box').textContent='📌 접수시각: '+kst()+' KST'; $('box').style.display='block'; b.style.display='none'; $('u').style.display='block'; }
+    function retry(){ if(done) return; done=true; b.disabled=false; b.textContent='다시 시도';
+      var e=$('err'); e.textContent='접수를 확인하지 못했습니다. 잠시 후 다시 눌러 주시거나 아래 채널톡으로 문의해 주세요.'; e.style.display='block'; $('u').style.display='block'; }
+    try{ gtag('event','unsubscribe_click',{utm_source:q.get('utm_source')||'email',utm_medium:q.get('utm_medium')||'coach_stage',utm_campaign:camp,utm_content:tok,event_callback:ok,event_timeout:2000}); }catch(e){ retry(); return; }
+    setTimeout(retry,3500);
+  };
+})();
+</script></body></html>

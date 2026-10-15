@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>미팅 일정 선택 · 카페24 PRO</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSZWXLY5DE"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-BSZWXLY5DE');
+</script>
+<style>
+body{margin:0;padding:0;background:#eef1f6;font-family:'Malgun Gothic','Apple SD Gothic Neo',Helvetica,Arial,sans-serif;color:#151a24}
+.wrap{padding:48px 12px}
+.card{max-width:600px;width:100%;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(20,40,80,.08)}
+.head{background:linear-gradient(135deg,#1b64f2 0%,#0a3fb0 100%);padding:34px 38px}
+.head .k{color:#cfe0ff;font-size:12px;font-weight:800;letter-spacing:1px}
+.head .t{color:#fff;font-size:21px;font-weight:800;margin-top:8px}
+.head .s{color:rgba(255,255,255,.88);font-size:13.5px;margin-top:6px;line-height:1.6}
+.body{padding:30px 38px}
+.m{color:#2b2f38;font-size:15px;line-height:1.8}
+.box{margin-top:20px;background:#f5f8ff;border:1px solid #dbe6ff;border-radius:10px;padding:14px 18px;color:#1b3b7a;font-size:13.5px;line-height:1.7}
+button{margin-top:22px;background:#1b64f2;color:#fff;border:0;border-radius:10px;padding:15px 30px;font-size:15.5px;font-weight:800;cursor:pointer;font-family:inherit}
+button[disabled]{background:#9ca3af;cursor:default}
+.u{margin-top:22px;color:#7a828f;font-size:13px;line-height:1.7}
+.u a{color:#1b64f2;text-decoration:none;font-weight:700}
+.foot{background:#fafbfd;padding:18px 38px;color:#9aa2af;font-size:12px;border-top:1px solid #eaedf3;line-height:1.7}
+@media (max-width:560px){.wrap{padding:16px 10px}.head{padding:26px 22px}.body{padding:24px 22px}.foot{padding:16px 22px}}
+</style></head><body>
+<div class="wrap"><div class="card">
+<div class="head"><div class="k">CAFE24 PRO · 고객성장코칭팀</div><div class="t" id="t">미팅 일정을 선택해 주세요</div>
+<div class="s">편하신 시간을 골라 주시면 일정이 바로 확정됩니다.</div></div>
+<div class="body">
+<div class="m" id="m">아래 버튼을 누르시면 담당자의 예약 달력이 열립니다. 예약하실 때 성함과 연락처를 남겨 주시면 됩니다.</div>
+<div class="box">남겨 주신 정보는 <strong>미팅 일정 조율 목적</strong>으로만 사용하며, 그 외 용도로 쓰지 않습니다.</div>
+<button type="button" id="b">일정 선택하기</button>
+<div class="u">급하시면 <a href="https://cafe24pro.channel.io/home">채널톡 채팅 상담</a>으로 먼저 문의하실 수 있습니다.</div>
+</div>
+<div class="foot">CAFE24 PRO · 고객성장코칭팀</div>
+</div></div>
+<script>
+var CAL={ jh:'https://calendar.app.google/tvVbT2iZqvuDbi788', sales:'' };
+(function(){
+  var $=function(i){return document.getElementById(i);}, q=new URLSearchParams(location.search), b=$('b');
+  var t=String(q.get('utm_content')||'').trim(), o=String(q.get('o')||q.get('owner')||'jh').trim();
+  var tk=/^[A-Za-z0-9_-]{4,64}$/.test(t)?t:'none';
+  var dest=Object.prototype.hasOwnProperty.call(CAL,o)?CAL[o]:'';
+  if(!/^https:\/\/(calendar\.app\.google|calendar\.google\.com)\//.test(dest)){
+    $('t').textContent='링크를 확인할 수 없습니다'; $('m').textContent='아래 채널톡으로 문의해 주시면 미팅 일정을 잡아 드리겠습니다.'; b.style.display='none'; return;
+  }
+  b.onclick=function(){
+    b.disabled=true; b.textContent='달력을 여는 중…';
+    var once=false; function go(){ if(once) return; once=true; location.href=dest; }
+    try{ gtag('event','meeting_click',{utm_source:q.get('utm_source')||'email',utm_medium:q.get('utm_medium')||'coach_stage',utm_campaign:q.get('utm_campaign')||'pro_coach_meeting',utm_content:tk,owner_key:o,event_callback:go,event_timeout:1500}); }catch(e){ go(); }
+    setTimeout(go,900);
+  };
+})();
+</script></body></html>
