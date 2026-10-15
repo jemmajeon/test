@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>수신거부</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSZWXLY5DE"></script>
+<script>
+// 웨비나 우회 페이지(test/)와 같은 GA4 속성. 링크의 utm_* 는 page_view 에서 GA4 가 자동으로 «캠페인» 으로 잡는다 (utm_campaign=pro_coach_unsub)
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-BSZWXLY5DE');
+</script>
+<style>
+body{margin:0;font-family:-apple-system,'Malgun Gothic','Noto Sans KR',sans-serif;background:#f5f7fb;color:#151a24}
+.box{max-width:520px;margin:70px auto;background:#fff;border-radius:14px;padding:40px 34px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.k{font-size:12px;font-weight:800;color:#1b64f2;letter-spacing:1px}
+h1{font-size:21px;margin:12px 0 14px}p{color:#4b5563;font-size:14px;line-height:1.8;margin:0 0 22px}
+button{background:#1b64f2;color:#fff;border:0;border-radius:8px;font-size:15px;font-weight:800;padding:13px 26px;cursor:pointer}
+button[disabled]{background:#9ca3af;cursor:default}
+</style></head><body>
+<div class="box"><div class="k">CAFE24 PRO · 고객성장코칭팀</div>
+<h1 id="h">수신거부 하시겠습니까?</h1>
+<p id="p">아래 버튼을 누르시면 이 쇼핑몰로는 카페24 PRO 고객성장코칭팀의 안내 메일을 더 보내지 않습니다.</p>
+<button id="b" type="button">수신거부 확인</button></div>
+<script>
+// 링크: unsub.html?utm_source=email&utm_medium=coach_stage&utm_campaign=pro_coach_unsub&utm_content=<불투명 토큰>
+// 몰 ID·이메일은 URL 에 없다 — 토큰은 내부 DB(unsub_history.db · unsub_tokens)에서만 몰/이메일/발송일로 풀린다.
+// 버튼을 눌러야만 처리한다 — 메일 보안 스캐너가 링크를 미리 열어도 수신거부가 걸리지 않게.
+(function(){
+  var q=new URLSearchParams(location.search), t=(q.get('utm_content')||'').trim();
+  var h=document.getElementById('h'), p=document.getElementById('p'), b=document.getElementById('b');
+  if(!/^[A-Za-z0-9]{8,32}$/.test(t)){ h.textContent='링크를 확인할 수 없습니다'; p.textContent='이 메일에 그대로 회신해 주시면 수신거부를 처리해 드리겠습니다.'; b.style.display='none'; return; }
+  b.onclick=function(){
+    b.disabled=true; b.textContent='처리 중…';
+    try{ gtag('event','unsubscribe_click',{utm_source:q.get('utm_source')||'email',utm_medium:q.get('utm_medium')||'coach_stage',utm_campaign:q.get('utm_campaign')||'pro_coach_unsub',utm_content:t}); }catch(e){}
+    // n8n 접수 웹훅에는 토큰만 넘긴다(mall·uid 칸에 같은 토큰) — 어느 몰인지는 내부에서 토큰으로 푼다
+    var u='https://n8n-fgs-009-web.hanpda.com/webhook/pro-unsubscribe?mall='+encodeURIComponent('tk_'+t)+'&shop=1&email=&step=coach_stage&uid='+encodeURIComponent(t);
+    var done=false;
+    function ok(){ if(done) return; done=true; h.textContent='수신거부가 처리되었습니다'; p.textContent='앞으로 이 쇼핑몰로는 안내 메일을 보내지 않습니다. 불편을 드려 죄송합니다.'; b.style.display='none'; }
+    var i=new Image(); i.onload=i.onerror=ok; i.src=u;   // GET 한 번이면 끝 — 응답 본문은 읽지 않는다
+    setTimeout(ok,4000);
+  };
+})();
+</script></body></html>
