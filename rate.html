@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>영상 시안 평가 · 카페24 PRO</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSZWXLY5DE"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-BSZWXLY5DE',{send_page_view:false});
+</script>
+<style>
+body{margin:0;padding:0;background:#eef1f6;font-family:'Malgun Gothic','Apple SD Gothic Neo',Helvetica,Arial,sans-serif;color:#151a24}
+.wrap{padding:48px 12px}
+.card{max-width:600px;width:100%;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(20,40,80,.08)}
+.head{background:linear-gradient(135deg,#1b64f2 0%,#0a3fb0 100%);padding:34px 38px}
+.head .k{color:#cfe0ff;font-size:12px;font-weight:800;letter-spacing:1px}
+.head .t{color:#fff;font-size:21px;font-weight:800;margin-top:8px}
+.body{padding:30px 38px}
+.m{color:#2b2f38;font-size:15px;line-height:1.8}
+.pick{margin-top:16px;background:#f5f8ff;border:1px solid #dbe6ff;border-radius:10px;padding:14px 18px;font-size:15px;line-height:1.7}
+.pick b{color:#1b3b7a}
+.sw{margin-top:8px;font-size:13px;color:#7a828f}
+.sw a{color:#1b64f2;text-decoration:none;font-weight:700;cursor:pointer}
+label{display:block;margin-top:22px;font-size:14px;font-weight:700;color:#2b2f38}
+textarea{box-sizing:border-box;width:100%;margin-top:8px;min-height:96px;border:1px solid #d4dae5;border-radius:10px;padding:12px;font:inherit;font-size:14px;resize:vertical}
+.hint{font-size:12px;color:#9aa2af;margin-top:4px}
+button{margin-top:14px;background:#1b64f2;color:#fff;border:0;border-radius:10px;padding:12px 24px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit}
+button[disabled]{background:#9ca3af;cursor:default}
+.st{margin-top:10px;font-size:13px;line-height:1.6;display:none}
+.ok{color:#1b7a3e}.err{color:#c62828}
+.foot{background:#fafbfd;padding:18px 38px;color:#9aa2af;font-size:12px;border-top:1px solid #eaedf3;line-height:1.7}
+@media (max-width:560px){.wrap{padding:16px 10px}.head{padding:26px 22px}.body{padding:24px 22px}.foot{padding:16px 22px}}
+</style></head><body>
+<div class="wrap"><div class="card">
+<div class="head"><div class="k">CAFE24 PRO · 비즈니스성장팀</div><div class="t" id="t">평가를 접수하고 있습니다…</div></div>
+<div class="body">
+<div class="m" id="m">잠시만 기다려 주세요.</div>
+<div class="pick" id="pick" style="display:none"></div>
+<div id="more" style="display:none">
+<label for="c">간단한 의견을 남겨 주시면 큰 도움이 됩니다 (선택)</label>
+<textarea id="c" maxlength="200" placeholder="예) 자막이 조금 작아요 / 메타 광고에 쓰고 싶어요 / 포장 색이 실제와 달라요"></textarea>
+<div class="hint">최대 200자 · 연락처 등 개인정보는 적지 말아 주세요.</div>
+<button type="button" id="b">의견 보내기</button>
+<div class="st" id="st"></div>
+</div>
+</div>
+<div class="foot">CAFE24 PRO · 비즈니스성장팀 · 메일에서 다른 영상의 버튼도 눌러 주실 수 있습니다.</div>
+</div></div>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i);}, q=new URLSearchParams(location.search);
+  var tok=String(q.get('utm_content')||'').trim(), r=String(q.get('r')||''), v=String(q.get('v')||'').slice(0,40);
+  var camp=String(q.get('utm_campaign')||'ugc_rate').trim().slice(0,60);
+  var NAME={good:'👍 쓸만해요',bad:'👎 별로에요'};
+  function kst(){ return new Date(Date.now()+9*3600*1000).toISOString().replace('T',' ').slice(11,16); }
+  if(!/^[A-Za-z0-9]{8,32}$/.test(tok) || !NAME[r]){
+    $('t').textContent='링크를 확인할 수 없습니다'; $('m').textContent='메일에 있는 평가 버튼으로 다시 열어 주세요.'; return;
+  }
+  function send(ev,title,cb){
+    var done=false;
+    function fin(ok){ if(done) return; done=true; cb(ok); }
+    try{ gtag('event',ev,{page_title:title,utm_source:q.get('utm_source')||'cafe24pro',utm_medium:q.get('utm_medium')||'email',
+         utm_campaign:camp,utm_content:tok,event_callback:function(){fin(true);},event_timeout:2000}); }catch(e){ fin(false); return; }
+    setTimeout(function(){fin(false);},3500);
+  }
+  function show(){
+    $('pick').innerHTML=''; var s=document.createElement('div');
+    s.appendChild(document.createTextNode((v||'영상 시안')+' → ')); var b=document.createElement('b'); b.textContent=NAME[r]; s.appendChild(b);
+    var sw=document.createElement('div'); sw.className='sw'; var a=document.createElement('a');
+    a.textContent=(r==='good'?'👎 별로에요':'👍 쓸만해요')+'로 바꾸기'; a.onclick=function(){ r=(r==='good'?'bad':'good'); rate(); };
+    sw.appendChild(document.createTextNode('잘못 누르셨나요? ')); sw.appendChild(a);
+    $('pick').appendChild(s); $('pick').appendChild(sw); $('pick').style.display='block';
+  }
+  function rate(){
+    $('t').textContent='평가를 접수하고 있습니다…';
+    send('rate_click','시안평가 '+tok+' '+r,function(ok){
+      if(ok){ $('t').textContent='평가가 접수되었습니다'; $('m').textContent='감사합니다. ('+kst()+' 접수)'; }
+      else { $('t').textContent='접수를 확인하지 못했습니다'; $('m').textContent='잠시 후 메일의 버튼을 다시 눌러 주시거나, 메일에 회신으로 알려 주세요.'; }
+      show(); $('more').style.display='block';
+    });
+  }
+  $('b').onclick=function(){
+    var c=$('c').value.replace(/\s+/g,' ').trim().slice(0,200), st=$('st'), b=$('b');
+    if(!c){ st.className='st err'; st.textContent='의견을 적어 주세요.'; st.style.display='block'; return; }
+    b.disabled=true; b.textContent='보내는 중…';
+    send('rate_comment','시안의견 '+tok+' '+r+' '+c,function(ok){
+      b.disabled=false; b.textContent='의견 보내기'; st.style.display='block';
+      if(ok){ st.className='st ok'; st.textContent='의견이 전달되었습니다. 감사합니다.'; $('c').value=''; }
+      else { st.className='st err'; st.textContent='전달을 확인하지 못했습니다. 다시 눌러 주시거나 메일에 회신으로 알려 주세요.'; }
+    });
+  };
+  rate();
+})();
+</script></body></html>
